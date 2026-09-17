@@ -1,0 +1,29 @@
+{
+  "name": "vindbaar-local",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Lokale KBO-bedrijfsselectie en website e-mailscraper",
+  "engines": {
+    "node": ">=24.15.0"
+  },
+  "scripts": {
+    "start": "node src/server.js",
+    "test": "node --test --test-concurrency=1 test/*.test.js",
+    "demo": "node scripts/demo.js",
+    "check": "node --check src/server.js && node --check public/app.js"
+  },
+  "dependencies": {
+    "cheerio": "^1.1.2",
+    "csv-parse": "^7.0.2",
+    "fastify": "^5.6.0",
+    "ipaddr.js": "^2.2.0",
+    "robots-parser": "^3.0.1",
+    "tldts": "^7.0.14",
+    "undici": "^7.16.0",
+    "yauzl": "^3.2.0"
+  },
+  "devDependencies": {
+    "fflate": "^0.8.2"
+  }
+}

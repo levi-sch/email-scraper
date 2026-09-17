@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="nl-BE">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Vindbaar — lokale bedrijfsleads</title><link rel="icon" href="/favicon.svg"><link rel="stylesheet" href="/style.css"><script type="module" src="/app.js"></script></head>
+<body>
+  <aside class="sidebar">
+    <a class="brand" href="/" aria-label="Vindbaar start"><img src="/favicon.svg" alt="" width="36" height="36"><span>vindbaar<span class="brand-dot">.</span></span></a>
+    <div class="workspace-label">JOUW WERKRUIMTE</div>
+    <nav aria-label="Hoofdnavigatie">
+      <button class="nav-item active" data-view="companies"><span data-icon="search"></span>Bedrijven vinden</button>
+      <button class="nav-item" data-view="results"><span data-icon="mail"></span>Resultaten<span class="nav-count" id="result-count">0</span></button>
+      <button class="nav-item" data-view="review"><span data-icon="flag"></span>Ter controle</button>
+      <button class="nav-item" data-view="excluded"><span data-icon="exclude"></span>Uitgesloten</button>
+    </nav>
+    <div class="nav-divider"></div>
+    <button class="nav-item" data-open="import"><span data-icon="database"></span>Databron</button>
+    <button class="nav-item" data-open="settings"><span data-icon="settings"></span>Instellingen</button>
+    <div class="sidebar-bottom"><div class="local-dot"></div><div><strong>Lokaal op jouw computer</strong><span>Je gegevens blijven hier.</span></div></div>
+  </aside>
+  <main>
+    <header class="topbar"><span>Werkruimte <span class="slash">/</span> Prospectie</span><div class="topbar-right"><span id="demo-label" class="badge amber" hidden>DEMO · fictieve gegevens</span><span class="local-badge"><i></i>Lokale app</span><span class="avatar">V</span></div></header>
+    <div class="content">
+      <section class="page-heading"><div><div class="eyebrow">VAN BEDRIJF NAAR CONTACT</div><h1 id="page-title">Vind je volgende zakelijke contact.</h1><p id="page-description">Kies je regio en doelgroep. Ontdek rolmailboxen op bedrijfswebsites.</p></div><button class="button secondary" data-open="import"><span data-icon="upload"></span>KBO importeren</button></section>
+      <div class="demo-notice" id="demo-notice" hidden>Dit is een aparte demonstratie met fictieve bedrijven en gesimuleerde websites. Adressen eindigen op .example en zijn niet bruikbaar.</div>
+      <section class="stats" aria-label="Overzicht">
+        <article class="stat"><div class="stat-icon orange" data-icon="building"></div><div><span>Bedrijven in bron</span><strong id="stat-companies">0</strong></div><span class="stat-foot">Actieve rechtspersonen</span></article>
+        <article class="stat"><div class="stat-icon blue" data-icon="globe"></div><div><span>Websites gecontroleerd</span><strong id="stat-scanned">0</strong></div><span class="stat-foot">Huidige KBO-import</span></article>
+        <article class="stat"><div class="stat-icon green" data-icon="mail"></div><div><span>Gevonden e-mailadressen</span><strong id="stat-emails">0</strong></div><span class="stat-foot">Unieke rolmailboxen</span></article>
+      </section>
+      <section class="filter-card" aria-label="Zoekfilters">
+        <div class="section-label"><span data-icon="sliders"></span>Stel je zoekgebied samen<span class="muted small">Opgeslagen op deze computer</span></div>
+        <div class="filter-grid">
+          <div class="filter-field"><label>Regio <span class="field-note">België</span></label><details id="region-picker"><summary><span data-icon="pin"></span><span id="region-label">Regio’s kiezen</span><span data-icon="chevron"></span></summary><div class="region-panel" id="region-options"></div></details><label class="check-label tiny"><input type="checkbox" id="include-unknown" checked>Onbekende locaties apart ter controle tonen</label></div>
+          <div class="filter-field sector-field"><label for="sector-search">Doelgroep <span class="field-note">Hoofdactiviteit · NACE-BEL 2025</span></label><div class="search-box"><span data-icon="search"></span><input id="sector-search" autocomplete="off" placeholder="Zoek een sector, bijvoorbeeld dakwerken"><div id="sector-results" class="sector-results" hidden></div></div><div id="sector-chips" class="chips"></div></div>
+        </div>
+        <div class="filter-footer"><button class="text-button" id="construction-preset"><span data-icon="bookmark"></span>Doelgroep: bouwbedrijven</button><div class="filter-actions"><button class="button secondary" id="apply-filters">Filters toepassen</button><button class="button primary" id="auto-scan"><span data-icon="scan"></span>Automatisch zoeken &amp; scannen</button></div></div>
+        <p class="auto-explanation">Zoekt in je KBO-bron en scant maximaal 100 bedrijven met een website. Eerder afgewerkte bedrijven worden overgeslagen. Je hoeft geen URL’s in te voeren.</p>
+      </section>
+      <section class="job-card" id="job-card" hidden aria-live="polite"><div class="job-heading"><span class="spinner"></span><div><strong id="job-title">Taak uitvoeren</strong><span id="job-message"></span></div><button class="button small-button" id="cancel-job">Stoppen</button></div><progress id="job-progress"></progress></section>
+      <section class="results-card">
+        <div class="results-heading"><div><h2 id="table-title">Bedrijven <span id="match-count" class="count-pill">0</span></h2><p id="table-caption">Selecteer maximaal 100 bedrijven per scan.</p></div><a class="button secondary" id="export-link" href="/api/export"><span data-icon="download"></span>Exporteren</a></div>
+        <div class="table-toolbar"><div class="search-box compact"><span data-icon="search"></span><input id="company-search" aria-label="Zoek bedrijfsnaam of ondernemingsnummer" placeholder="Zoek binnen je resultaten"></div><div class="selection-actions"><span id="selection-count">0 geselecteerd</span><button id="start-scan" class="button dark" disabled><span data-icon="scan"></span>Scan selectie</button></div></div>
+        <div id="empty-state" class="empty-state"><div class="empty-visual"><span data-icon="building"></span><span class="mini-mail" data-icon="mail"></span></div><span class="eyebrow">EEN EIGEN, CONTROLEERBARE BRON</span><h2>Begin met je KBO-bestand.</h2><p>Importeer de gratis bedrijfsdata. Daarna kun je bedrijven vinden<br>en hun website doorzoeken op zakelijke contactadressen.</p><button class="button primary" data-open="import"><span data-icon="plus"></span>Bedrijfsdata toevoegen</button><div class="empty-steps"><span><b>01</b> Importeer je bron</span><span><b>02</b> Kies je doelgroep</span><span><b>03</b> Scan de websites</span></div></div>
+        <div class="table-scroll" id="table-wrap" hidden><table><thead><tr><th class="checkbox-cell"><input id="select-all" type="checkbox" aria-label="Selecteer alle bedrijven met een website op deze pagina"></th><th>Bedrijf</th><th>Vestiging</th><th>Hoofdactiviteit</th><th>E-mailadres</th><th>Status</th><th><span class="sr-only">Details</span></th></tr></thead><tbody id="company-rows"></tbody></table></div>
+        <div id="no-results" class="no-results" hidden><span data-icon="search"></span><h3>Geen bedrijven binnen deze selectie.</h3><p>Pas je regio of sector aan, of wis de zoekterm.</p></div>
+        <footer class="table-footer"><span id="pagination-label">Nog geen bron geïmporteerd</span><div><button id="previous-page" class="icon-button" aria-label="Vorige pagina" disabled>←</button><button id="next-page" class="icon-button" aria-label="Volgende pagina" disabled>→</button></div></footer>
+      </section>
+      <footer class="page-footer"><span id="source-status">Bron: KBO Open Data · nog niet geïmporteerd</span><span>Alleen gepubliceerde rolmailboxen. Elke vondst met bronpagina.</span></footer>
+    </div>
+  </main>
+  <dialog id="import-dialog"><div class="dialog-header"><div><div class="eyebrow">JE BEDRIJFSBRON</div><h2>KBO Open Data importeren</h2></div><button class="icon-button" data-close aria-label="Sluiten">×</button></div><p class="dialog-intro">Download via je gratis KBO-account het volledige <strong>Full.zip</strong>-bestand. Je hoeft het niet uit te pakken.</p><a class="external-link" target="_blank" rel="noopener noreferrer" href="https://kbopub.economie.fgov.be/kbo-open-data/">Naar KBO Open Data ↗</a><label class="drop-zone" id="drop-zone"><span data-icon="upload"></span><strong id="file-label">Kies je Full.zip-bestand</strong><span>of sleep het hierheen · maximaal 4 GB</span><input id="zip-file" type="file" accept=".zip,application/zip"></label><div class="note"><span data-icon="shield"></span><p>Alleen actieve rechtspersonen worden opgenomen. Een nieuwe import wordt eerst gecontroleerd; bij een fout blijft je vorige bron behouden.</p></div><p class="muted small">Na een nieuwe import blijven eerdere vondsten bewaard. Scan opnieuw voordat je ze vanuit de nieuwe bron exporteert.</p><div class="dialog-footer"><span id="upload-message" aria-live="polite"></span><button class="button primary" id="upload-file" disabled>Import starten</button></div></dialog>
+  <dialog id="settings-dialog"><div class="dialog-header"><div><div class="eyebrow">SCRAPINGINSTELLINGEN</div><h2>Welke rolmailboxen zoeken?</h2></div><button class="icon-button" data-close aria-label="Sluiten">×</button></div><p class="dialog-intro">Vul de mailboxnamen in, gescheiden door komma’s. Alleen adressen op het eigen bedrijfsdomein tellen mee.</p><label class="form-label" for="role-input">Mailboxnamen</label><textarea id="role-input" rows="4" placeholder="info, contact, offerte"></textarea><div class="note"><span data-icon="mail"></span><p><strong>info@bedrijfsnaam.be</strong> kan meetellen. Persoonlijke mailboxnamen en adressen bij Gmail of Outlook worden niet opgenomen.</p></div><p class="muted small">De crawler leest de startpagina en maximaal 10 extra HTML-pagina’s. Toegangsblokkades en robots.txt worden gerespecteerd. Een gevonden adres is niet op afleverbaarheid getest.</p><div class="dialog-footer"><button class="button primary" id="save-settings">Instellingen opslaan</button></div></dialog>
+  <dialog id="detail-dialog" class="detail-dialog"><div id="detail-content"></div></dialog>
+  <div class="toast" id="toast" role="status" hidden></div>
+</body></html>
